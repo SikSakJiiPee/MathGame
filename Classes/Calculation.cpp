@@ -1,6 +1,7 @@
 #include "Calculation.h"
 #include <iostream>
 #include <string>
+#include <sstream>
 #include <cstdlib>
 
 cocos2d::Scene* Calculation::createScene()
@@ -16,15 +17,24 @@ bool Calculation::init()
 	if (!Layer::init())
 		return false;
 
-	std::string snumber = "1";
-	std::string snumber2 = "2";
+	//int number = randomNumber();
+	//std::stringstream ss;
+	//ss << number;
+	//std::string str = ss.str();
+
+	int number2 = randomNumber();
+	std::stringstream ss2;
+	ss2 << number2;
+	std::string str2 = ss2.str();
+
+	std::string str = "1";
 
 	auto label = cocos2d::Label::createWithSystemFont("Calculation", "Arial", 30);
 	label->setPosition(cocos2d::Vec2(this->getBoundingBox().getMidX(), this->getBoundingBox().getMaxY() - 20));
 	this->addChild(label, 1);
 
 	//auto label2 = cocos2d::Label::createWithSystemFont("1+1=?", "Arial", 30);
-	auto label2 = cocos2d::Label::createWithSystemFont(snumber + " + " + snumber2, "Arial", 30);
+	auto label2 = cocos2d::Label::createWithSystemFont(str + " + " + str2, "Arial", 30);
 	label2->setPosition(cocos2d::Vec2(this->getBoundingBox().getMidX(), this->getBoundingBox().getMidY()));
 	this->addChild(label2, 2);
 
@@ -49,8 +59,7 @@ bool Calculation::init()
 
 int Calculation::randomNumber()
 {
-	cocos2d::log("joo");
-	int number = rand() % 100;
-	std::cout << number;
-	return number;
+	int rNumber = rand() % 100;
+
+	return rNumber;
 }
