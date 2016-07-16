@@ -21,6 +21,7 @@ public:
 	int getCorrectAnswerPlus(int number, int number2);
 	int getCorrectAnswerMinus(int number, int number2);
 	std::string convertIntToString(int number);
+	bool checkTheAnswer(int playerAnswer, int correctAnswer);
 
 	CREATE_FUNC(Calculation);
 };

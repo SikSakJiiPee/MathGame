@@ -1,5 +1,7 @@
 #include "Calculation.h"
 
+
+
 cocos2d::Scene* Calculation::createScene()
 {
 	auto sceneCalculation = cocos2d::Scene::create();
@@ -13,22 +15,10 @@ bool Calculation::init()
 	if (!Layer::init())
 		return false;
 
-	int number = randomNumber();
-	std::string sNumber = convertIntToString(number);
-
-	int number2 = randomNumber();
-	std::string sNumber2 = convertIntToString(number2);
-
-	int correctAnswer = getCorrectAnswerPlus(number, number2);
-	std::string sCorrectAnswer = convertIntToString(correctAnswer);
-
 	auto label = cocos2d::Label::createWithSystemFont("Calculation", "Arial", 30);
 	label->setPosition(cocos2d::Vec2(this->getBoundingBox().getMidX(), this->getBoundingBox().getMaxY() - 20));
 	this->addChild(label, 1);
-
-	auto label2 = cocos2d::Label::createWithSystemFont(sNumber + " + " + sNumber2 + " = " + sCorrectAnswer, "Arial", 30);
-	label2->setPosition(cocos2d::Vec2(this->getBoundingBox().getMidX(), this->getBoundingBox().getMidY()));
-	this->addChild(label2, 2);
+	
 
 	auto listener = cocos2d::EventListenerKeyboard::create();
 	listener->onKeyPressed = [=](cocos2d::EventKeyboard::KeyCode keyCode, cocos2d::Event* evnt)
@@ -37,7 +27,18 @@ bool Calculation::init()
 		{
 		case cocos2d::EventKeyboard::KeyCode::KEY_SPACE:
 		{
-			randomNumber();
+			int number = randomNumber();
+			std::string sNumber = convertIntToString(number);
+
+			int number2 = randomNumber();
+			std::string sNumber2 = convertIntToString(number2);
+
+			int correctAnswer = getCorrectAnswerPlus(number, number2);
+			std::string sCorrectAnswer = convertIntToString(correctAnswer);
+
+			auto label2 = cocos2d::Label::createWithSystemFont(sNumber + " + " + sNumber2 + " = " + sCorrectAnswer, "Arial", 30);
+			label2->setPosition(cocos2d::Vec2(this->getBoundingBox().getMidX(), this->getBoundingBox().getMidY()));
+			this->addChild(label2, 2);
 
 			break;
 		}
@@ -80,4 +81,14 @@ std::string Calculation::convertIntToString(int intNumber)
 	std::string stringNumber = ss.str();
 
 	return stringNumber;
+}
+
+bool Calculation::checkTheAnswer(int playerAnswer, int correctAnswer)
+{
+	if (playerAnswer == correctAnswer)
+	{
+		return false;
+	}
+
+	return true;
 }
